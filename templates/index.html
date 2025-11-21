@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPSC Essay Evaluator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1><i class="fa-solid fa-pen-nib"></i> Essay Evaluator</h1>
+            <p>AI-Powered Detailed Analysis & Scoring</p>
+        </header>
+
+        <main>
+            <section class="input-section glass-panel">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="text-input">
+                        <i class="fa-solid fa-align-left"></i> Paste Text
+                    </button>
+                    <button class="tab-btn" data-tab="file-upload">
+                        <i class="fa-solid fa-file-pdf"></i> Upload PDF
+                    </button>
+                </div>
+
+                <div class="tab-content active" id="text-input">
+                    <textarea id="essay-text" placeholder="Paste your essay here..."></textarea>
+                </div>
+
+                <div class="tab-content" id="file-upload">
+                    <div class="file-drop-area" id="drop-area">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <p>Drag & Drop PDF here or <span>Browse</span></p>
+                        <input type="file" id="essay-file" accept=".pdf" hidden>
+                        <div class="file-name" id="file-name"></div>
+                    </div>
+                </div>
+
+                <button id="evaluate-btn" class="cta-btn">
+                    <span>Evaluate Essay</span>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </button>
+            </section>
+
+            <section id="results-section" class="results-section hidden">
+                <div class="score-card glass-panel">
+                    <h2>Overall Score</h2>
+                    <div class="score-circle">
+                        <svg>
+                            <circle cx="70" cy="70" r="70"></circle>
+                            <circle cx="70" cy="70" r="70" id="score-progress"></circle>
+                        </svg>
+                        <div class="number">
+                            <h3 id="avg-score">0</h3>
+                            <small>/10</small>
+                        </div>
+                    </div>
+                    <p class="score-label">Average Score</p>
+                </div>
+
+                <div class="feedback-grid">
+                    <div class="feedback-card glass-panel" style="--delay: 0.1s">
+                        <h3><i class="fa-solid fa-language"></i> Language</h3>
+                        <div class="score-badge" id="lang-score"></div>
+                        <p id="lang-feedback"></p>
+                    </div>
+                    <div class="feedback-card glass-panel" style="--delay: 0.2s">
+                        <h3><i class="fa-solid fa-magnifying-glass-chart"></i> Analysis</h3>
+                        <div class="score-badge" id="analysis-score"></div>
+                        <p id="analysis-feedback"></p>
+                    </div>
+                    <div class="feedback-card glass-panel" style="--delay: 0.3s">
+                        <h3><i class="fa-solid fa-lightbulb"></i> Clarity</h3>
+                        <div class="score-badge" id="clarity-score"></div>
+                        <p id="clarity-feedback"></p>
+                    </div>
+                </div>
+
+                <div class="overall-feedback glass-panel" style="--delay: 0.4s">
+                    <h3><i class="fa-solid fa-clipboard-check"></i> Overall Feedback</h3>
+                    <div id="overall-feedback-content"></div>
+                </div>
+            </section>
+            
+            <div id="loading-overlay" class="loading-overlay hidden">
+                <div class="loader"></div>
+                <p>Analyzing your essay...</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
